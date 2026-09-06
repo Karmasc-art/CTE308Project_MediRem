@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/background_green">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_arrow_back"
+        android:contentDescription="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Medicine"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"/>
+
+    <ImageView
+        android:id="@+id/imgMedicine"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/ic_medicine"
+        android:scaleType="centerCrop"
+        android:background="@drawable/photo_background"
+        android:contentDescription="Medicine photo"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTakePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take Photo"
+        app:icon="@drawable/ic_camera"
+        app:layout_constraintTop_toBottomOf="@id/imgMedicine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Medicine Name"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/btnTakePhoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dosageLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Dosage"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/nameLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDosage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/noteLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Note"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/dosageLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTime"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:text="Select Time"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/noteLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSave"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:text="Save Medicine"
+        android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@id/btnTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
