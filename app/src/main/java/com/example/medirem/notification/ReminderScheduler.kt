@@ -10,21 +10,24 @@ import java.util.Calendar
 object ReminderScheduler {
 
     fun scheduleMedicine(context: Context, medicine: Medicine) {
-        val parts = medicine.time.split(":")
-        if (parts.size != 2) return
+        val timeParts = medicine.time.split(":")
+        val dateParts = medicine.date.split("-")
+        if (timeParts.size != 2 || dateParts.size != 3) return
 
-        val hour = parts[0].toIntOrNull() ?: return
-        val minute = parts[1].toIntOrNull() ?: return
+        val hour = timeParts[0].toIntOrNull() ?: return
+        val minute = timeParts[1].toIntOrNull() ?: return
+        val year = dateParts[0].toIntOrNull() ?: return
+        val month = dateParts[1].toIntOrNull()?.minus(1) ?: return
+        val day = dateParts[2].toIntOrNull() ?: return
 
         val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, hour)
-            set(Calendar.MINUTE, minute)
-            set(Calendar.SECOND, 0)
+            set(year, month, day, hour, minute, 0)
             set(Calendar.MILLISECOND, 0)
+        }
 
-            if (timeInMillis <= System.currentTimeMillis()) {
-                add(Calendar.DAY_OF_YEAR, 1)
-            }
+        if (calendar.timeInMillis <= System.currentTimeMillis()) {
+            // Already passed
+            return
         }
 
         val intent = Intent(context, MedicineReminderReceiver::class.java).apply {
@@ -41,10 +44,23 @@ object ReminderScheduler {
         )
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(
+        
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            if (!alarmManager.canScheduleExactAlarms()) {
+                // If we can't schedule exact alarms, fallback to non-exact or just don't schedule
+                // Ideally, the app should request permission before this.
+                alarmManager.set(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    pendingIntent
+                )
+                return
+            }
+        }
+
+        alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
     }

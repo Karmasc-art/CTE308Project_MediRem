@@ -11,6 +11,7 @@ data class Medicine(
     val dosage: String,
     val note: String = "",
     val time: String,
+    val date: String,
     val photoUri: String? = null,
     val taken: Boolean = false
 )

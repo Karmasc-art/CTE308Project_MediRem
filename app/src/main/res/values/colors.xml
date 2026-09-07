@@ -2,5 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background_green">#A5D6A7</color>
+    <color name="primary_green">#15803D</color>
+    <color name="background_light">#F8FAF9</color>
+    <color name="gray_text">#374151</color>
+    <color name="upcoming_yellow">#FEF3C7</color>
+    <color name="upcoming_text">#D97706</color>
+    <color name="missed_red">#FEE2E2</color>
+    <color name="missed_text">#DC2626</color>
+    <color name="taken_green">#DCFCE7</color>
+    <color name="taken_text">#16A34A</color>
 </resources>

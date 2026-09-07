@@ -5,11 +5,14 @@ import androidx.room.*
 @Dao
 interface MedicineDao {
 
-    @Query("SELECT * FROM medicines ORDER BY time ASC")
+    @Query("SELECT * FROM medicines ORDER BY date DESC, time ASC")
     suspend fun getAllMedicines(): List<Medicine>
 
+    @Query("SELECT * FROM medicines WHERE date = :date ORDER BY time ASC")
+    suspend fun getMedicinesByDate(date: String): List<Medicine>
+
     @Insert
-    suspend fun insertMedicine(medicine: Medicine)
+    suspend fun insertMedicine(medicine: Medicine): Long
 
     @Update
     suspend fun updateMedicine(medicine: Medicine)

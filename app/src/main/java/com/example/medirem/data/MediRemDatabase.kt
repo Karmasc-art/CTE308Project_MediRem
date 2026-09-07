@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Medicine::class], version = 1, exportSchema = false)
+@Database(entities = [Medicine::class], version = 2, exportSchema = false)
 abstract class MediRemDatabase : RoomDatabase() {
     abstract fun medicineDao(): MedicineDao
 
@@ -19,7 +19,9 @@ abstract class MediRemDatabase : RoomDatabase() {
                     context.applicationContext,
                     MediRemDatabase::class.java,
                     "medirem_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }
